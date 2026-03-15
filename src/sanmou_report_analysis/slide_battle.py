@@ -1,20 +1,12 @@
 # Author: Mian Qin
 # Date Created: 2024/10/27
 from pathlib import Path
-import time
-import functools
-import winsound
 
-import numpy as np
-import pyautogui
-import cv2
 import keyboard
 
-from sanmou_report_analysis.utils.data_structure import MatchResult, TextColor, BoundingBox, create_lazy_dict
-from sanmou_report_analysis.utils.image import *
 from sanmou_report_analysis.utils.process_info import get_resolution
 from sanmou_report_analysis.utils.slide_report import slide_battle_images
-from sanmou_report_analysis.utils.stitch import stitch_images
+
 
 def collect_report():
     root_dir = Path("./battle")
@@ -28,20 +20,20 @@ def collect_report():
         if event.event_type == keyboard.KEY_DOWN:
             if event.name == "s":
                 position_info = get_resolution()
-                image_list = slide_battle_images(save_dir, position_info, max_n=1)
+                slide_battle_images(save_dir, position_info, max_n=1)
 
                 current_idx += 1
                 stop = False
                 print("收集完成，退出程序。")
-                #winsound.Beep(300, 1000)
+                # winsound.Beep(300, 1000)
             if event.name == "q":
                 break
     keyboard.unhook_all()
 
+
 def main():
     collect_report()
 
+
 if __name__ == "__main__":
     main()
-
-

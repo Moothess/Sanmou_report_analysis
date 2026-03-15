@@ -1,7 +1,8 @@
 import sys
+
 import cv2
 import numpy as np
-from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class ColorThresholdApp(QtWidgets.QMainWindow):
@@ -136,9 +137,9 @@ class ColorThresholdApp(QtWidgets.QMainWindow):
         img = cv2.imread(path, cv2.IMREAD_COLOR)
         if img is not None:
             pass
-            #gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            #_, binary = cv2.threshold(gray, 50, 255, cv2.THRESH_BINARY)
-            #img = img * (binary > 0)[..., None].astype(img.dtype)
+            # gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            # _, binary = cv2.threshold(gray, 50, 255, cv2.THRESH_BINARY)
+            # img = img * (binary > 0)[..., None].astype(img.dtype)
         if img is None:
             QtWidgets.QMessageBox.warning(self, "错误", "无法读取图片。")
             return
@@ -176,17 +177,23 @@ class ColorThresholdApp(QtWidgets.QMainWindow):
         if self.image_hsv is None:
             return
         # HSV mask
-        h_low = self.spins["h_low"].value(); h_high = self.spins["h_high"].value()
-        s_low = self.spins["s_low"].value(); s_high = self.spins["s_high"].value()
-        v_low = self.spins["v_low"].value(); v_high = self.spins["v_high"].value()
+        h_low = self.spins["h_low"].value()
+        h_high = self.spins["h_high"].value()
+        s_low = self.spins["s_low"].value()
+        s_high = self.spins["s_high"].value()
+        v_low = self.spins["v_low"].value()
+        v_high = self.spins["v_high"].value()
         lower_hsv = np.array([h_low, s_low, v_low], dtype=np.uint8)
         upper_hsv = np.array([h_high, s_high, v_high], dtype=np.uint8)
         mask_hsv = cv2.inRange(self.image_hsv, lower_hsv, upper_hsv)
 
         # BGR mask
-        b_low = self.spins["b_low"].value(); b_high = self.spins["b_high"].value()
-        g_low = self.spins["g_low"].value(); g_high = self.spins["g_high"].value()
-        r_low = self.spins["r_low"].value(); r_high = self.spins["r_high"].value()
+        b_low = self.spins["b_low"].value()
+        b_high = self.spins["b_high"].value()
+        g_low = self.spins["g_low"].value()
+        g_high = self.spins["g_high"].value()
+        r_low = self.spins["r_low"].value()
+        r_high = self.spins["r_high"].value()
         lower_bgr = np.array([b_low, g_low, r_low], dtype=np.uint8)
         upper_bgr = np.array([b_high, g_high, r_high], dtype=np.uint8)
         mask_bgr = cv2.inRange(self.image_bgr, lower_bgr, upper_bgr)
@@ -197,7 +204,11 @@ class ColorThresholdApp(QtWidgets.QMainWindow):
         if self.cb_show_mask.isChecked():
             # 显示黑白掩膜
             qimg = QtGui.QImage(
-                mask.data, mask.shape[1], mask.shape[0], mask.strides[0], QtGui.QImage.Format_Grayscale8
+                mask.data,
+                mask.shape[1],
+                mask.shape[0],
+                mask.strides[0],
+                QtGui.QImage.Format_Grayscale8,
             )
             self.result_pixmap = QtGui.QPixmap.fromImage(qimg)
         else:

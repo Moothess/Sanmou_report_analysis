@@ -1,16 +1,12 @@
 # Author: Mian Qin
 # Date Created: 2025/6/18
-from collections import defaultdict
-from typing import Optional, Union
-from pathlib import Path
-import bisect
-import json
+from collections.abc import Callable
 
-from typing import Callable
+# from logger_config import logger
+from enum import Enum, IntEnum, StrEnum, auto
+from typing import Optional, Union
 
 import cv2
-#from logger_config import logger
-from enum import auto, Enum, IntEnum, StrEnum, Flag
 
 
 class Round(IntEnum):
@@ -72,6 +68,7 @@ class TroopType(StrEnum):
     枪兵 = "枪兵"
     骑兵 = "骑兵"
 
+
 class TextColor(StrEnum):
     ORANGE = "orange"  # 会心奇谋伤害颜色
     BLUE = "blue"  # 我方团队颜色
@@ -83,18 +80,23 @@ class TextColor(StrEnum):
     OTHER = "purple"  # 其他颜色
     ICON = "icon"  # 图标颜色
 
+
 class BoundingBox:
     __slots__ = ("l", "t", "r", "b")
 
     def __init__(self, ltrb):
-        l, t, r, b = ltrb
-        self.l = int(l)
-        self.t = int(t)
-        self.r = int(r)
-        self.b = int(b)
+        left, top, right, bottom = ltrb
+        self.l = int(left)
+        self.t = int(top)
+        self.r = int(right)
+        self.b = int(bottom)
 
     def __repr__(self):
-        return f"BoundingBox(l={self.l}, t={self.t}, r={self.r}, b={self.b}, height={self.height}, width={self.width})"
+        return (
+            "BoundingBox("
+            f"l={self.l}, t={self.t}, r={self.r}, b={self.b}, "
+            f"height={self.height}, width={self.width})"
+        )
 
     @property
     def height(self):
@@ -138,12 +140,14 @@ class BoundingBox:
         self.b = self.b + dt
 
     def merge(self, other: "BoundingBox"):
-        return BoundingBox((
-            min(self.l, other.l),
-            min(self.t, other.t),
-            max(self.r, other.r),
-            max(self.b, other.b),
-        ))
+        return BoundingBox(
+            (
+                min(self.l, other.l),
+                min(self.t, other.t),
+                max(self.r, other.r),
+                max(self.b, other.b),
+            )
+        )
 
     def vertical_gap_box(self, other: "BoundingBox", expand: int = 0) -> Union["BoundingBox", None]:
         """
@@ -152,12 +156,14 @@ class BoundingBox:
         if self.b >= other.t:
             return None
 
-        return BoundingBox((
-            min(self.l, other.l),
-            max(self.b - expand, self.t),
-            max(self.r, other.r),
-            min(other.t + expand, other.b),
-        ))
+        return BoundingBox(
+            (
+                min(self.l, other.l),
+                max(self.b - expand, self.t),
+                max(self.r, other.r),
+                min(other.t + expand, other.b),
+            )
+        )
 
     def horizontal_gap_box(self, other: "BoundingBox", expand: int = 0) -> Optional["BoundingBox"]:
         """
@@ -166,12 +172,14 @@ class BoundingBox:
         if self.r >= other.l:
             return None
 
-        return BoundingBox((
-            max(self.r - expand, self.l),
-            min(self.t, other.t),
-            min(other.l + expand, other.r),
-            max(self.b, other.b),
-        ))
+        return BoundingBox(
+            (
+                max(self.r - expand, self.l),
+                min(self.t, other.t),
+                min(other.l + expand, other.r),
+                max(self.b, other.b),
+            )
+        )
 
     def intersection_area(self, other):
         """计算两个边界框的交集面积"""
@@ -213,15 +221,13 @@ class BoundingBox:
     def is_overlap(self, other: "BoundingBox") -> bool:
         if self.r <= other.l or other.r <= self.l:
             return False
-        if self.b <= other.t or other.b <= self.t:
-            return False
-        return True
+        return not (self.b <= other.t or other.b <= self.t)
 
 
 class MatchResult:
     __slots__ = ("box", "score")
 
-    def __init__(self, box: BoundingBox | tuple, score: Optional[float] = None):
+    def __init__(self, box: BoundingBox | tuple, score: float | None = None):
         if isinstance(box, tuple):
             box = BoundingBox(box)
         self.box = box
@@ -234,7 +240,7 @@ class MatchResult:
 class OCRResult:
     __slots__ = ("box", "text")
 
-    def __init__(self, box: Union[BoundingBox, tuple], text):
+    def __init__(self, box: BoundingBox | tuple, text):
         if isinstance(box, tuple):
             box = BoundingBox(box)
         self.box = box

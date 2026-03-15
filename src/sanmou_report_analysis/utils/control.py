@@ -4,16 +4,16 @@ import random
 import time
 
 import numpy as np
-from pynput.mouse import Controller as MouseController, Button
-
+from pynput.mouse import Button
+from pynput.mouse import Controller as MouseController
 
 # 初始化鼠标控制器
 _mouse = MouseController()
 
 
-def click_ltrb(l: int, t: int, r: int, b: int):
-    x = np.random.randint(l, r)
-    y = np.random.randint(t, b)
+def click_ltrb(left: int, top: int, right: int, bottom: int):
+    x = np.random.randint(left, right)
+    y = np.random.randint(top, bottom)
     _mouse.position = (x, y)
     _mouse.click(Button.left, 1)
 
@@ -22,7 +22,7 @@ def human_like_move(x0, y0, x1, y1, duration=1.0, steps=5):
     # 计算方向向量
     dx = x1 - x0
     dy = y1 - y0
-    distance = np.sqrt(dx ** 2 + dy ** 2)
+    distance = np.sqrt(dx**2 + dy**2)
 
     # 单位方向向量
     if distance > 0:

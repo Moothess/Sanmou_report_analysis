@@ -23,8 +23,9 @@ def collect_report(stage1):
     save_dir = root_dir / str(current_idx)
     if stage1:
         import keyboard
-        from sanmou_report_analysis.utils.process_info import get_resolution
+
         from sanmou_report_analysis.utils.collect_battle_image import get_battle_images
+        from sanmou_report_analysis.utils.process_info import get_resolution
 
         print("按s开始。按q退出。")
         stop = True
@@ -39,12 +40,13 @@ def collect_report(stage1):
                     current_idx += 1
                     stop = False
                     print("按s开始。按q退出。")
-                    #winsound.Beep(300, 1000)
+                    # winsound.Beep(300, 1000)
                 if event.name == "q":
                     break
         keyboard.unhook_all()
     else:
         stitch_images([], save_dir, repaint=False)
+
 
 def main():
     # 两个步骤：1.实时截图，2.截图拼接
@@ -53,8 +55,10 @@ def main():
     if stage1:
         ensure_capture_supported_platform()
     from sanmou_report_analysis.report_analysis import main_phase2
+
     collect_report(stage1)
     main_phase2()
+
 
 if __name__ == "__main__":
     main()
