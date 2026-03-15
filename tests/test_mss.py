@@ -1,10 +1,10 @@
 from pathlib import Path
-from utils.process_info import get_resolution
+from sanmou_report_analysis.utils.process_info import get_resolution
 import win32gui
 import mss
 import numpy as np
 
-from utils.image import *
+from sanmou_report_analysis.utils.image import *
 
 
 

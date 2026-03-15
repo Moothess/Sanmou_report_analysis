@@ -9,7 +9,7 @@ import cv2
 import numpy as np
 from PIL import ImageGrab
 
-from utils.data_structure import *
+from sanmou_report_analysis.utils.data_structure import *
 
 def ltrb_to_ltwh(left, top, right, bottom):
     """

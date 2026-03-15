@@ -12,10 +12,10 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 #from utils
-from utils.ocr import ocr_text
-from utils.image import *
-from utils.sentence import *
-from utils.data_structure import *
+from sanmou_report_analysis.utils.ocr import ocr_text
+from sanmou_report_analysis.utils.image import *
+from sanmou_report_analysis.utils.sentence import *
+from sanmou_report_analysis.utils.data_structure import *
 
 _troop_type_icon_dict = create_lazy_dict(
     {

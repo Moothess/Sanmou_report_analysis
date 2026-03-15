@@ -7,10 +7,10 @@ import numpy as np
 import cv2
 import keyboard
 
-from utils.data_structure import MatchResult, TextColor, BoundingBox, create_lazy_dict
-from utils.image import *
-from utils.process_info import get_resolution
-from utils.collect_battle_image import get_battle_images
+from sanmou_report_analysis.utils.data_structure import MatchResult, TextColor, BoundingBox, create_lazy_dict
+from sanmou_report_analysis.utils.image import *
+from sanmou_report_analysis.utils.process_info import get_resolution
+from sanmou_report_analysis.utils.collect_battle_image import get_battle_images
 
 color_map = {
     TextColor.WHITE: (255, 255, 255),

@@ -1,6 +1,6 @@
 import win32gui
 import mss
-from utils.image import save_image
+from sanmou_report_analysis.utils.image import save_image
 import numpy as np
 
 process_name = "三国：谋定天下"

@@ -11,13 +11,13 @@ from tqdm import tqdm
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-from utils.ocr import ocr_text, ocr_number #, ColoredOCRer
-from utils.analyze import analysis
-from utils.data_structure import *
-from utils.sentence import *
-from utils.image import *
-from utils.meta_info import extract_meta_info
-from utils.stitch import get_image_mask_by_color
+from sanmou_report_analysis.utils.ocr import ocr_text, ocr_number #, ColoredOCRer
+from sanmou_report_analysis.utils.analyze import analysis
+from sanmou_report_analysis.utils.data_structure import *
+from sanmou_report_analysis.utils.sentence import *
+from sanmou_report_analysis.utils.image import *
+from sanmou_report_analysis.utils.meta_info import extract_meta_info
+from sanmou_report_analysis.utils.stitch import get_image_mask_by_color
 
     
 def which_color(bgr):

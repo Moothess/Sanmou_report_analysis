@@ -21,10 +21,10 @@ Sanmou Battle Analysis Tool (SBAT)
 
 ### 完整流程（采集 + 分析）
 
-运行 `report_collection.py`，它会依次完成截图采集和战报分析：
+运行 `sanmou_report_analysis.report_collection`，它会依次完成截图采集和战报分析：
 
 ```bash
-python report_collection.py
+python -m sanmou_report_analysis.report_collection
 ```
 
 1. 程序启动后，在游戏内打开目标战报详情页。
@@ -36,10 +36,10 @@ python report_collection.py
 
 ### 仅分析（不重新截图）
 
-直接运行 `report_analysis.py`，对 `data/` 目录下最新的战报数据执行分析：
+直接运行 `sanmou_report_analysis.report_analysis`，对 `data/` 目录下最新的战报数据执行分析：
 
 ```bash
-python report_analysis.py
+python -m sanmou_report_analysis.report_analysis
 ```
 
 > `stage1 = True` 表示重新执行元信息提取和图像解析；改为 `False` 则从已保存的 `meta_info.json` / `sentence.pkl` 中读取缓存，直接进行分析。
@@ -48,7 +48,7 @@ python report_analysis.py
 
 ## 内部流程说明
 
-### `report_collection.py`（第一阶段）
+### `sanmou_report_analysis.report_collection`（第一阶段）
 
 | 步骤 | 说明 |
 |------|------|
@@ -56,7 +56,7 @@ python report_analysis.py
 | `get_battle_images()` | 自动翻页截取各回合战报图像 |
 | `stitch_images()` | 将截图拼接为完整长图，保存至 `data/<id>/` |
 
-### `report_analysis.py`（第二阶段）
+### `sanmou_report_analysis.report_analysis`（第二阶段）
 
 | 步骤 | 说明 |
 |------|------|

@@ -12,10 +12,10 @@ import win32gui
 import pyautogui
 import pygetwindow as gw
 
-from utils.data_structure import MatchResult, TextColor, BoundingBox, create_lazy_dict
-from utils.image import *
-from utils.control import human_like_move
-#from utils.ocr import ocr_text
+from sanmou_report_analysis.utils.data_structure import MatchResult, TextColor, BoundingBox, create_lazy_dict
+from sanmou_report_analysis.utils.image import *
+from sanmou_report_analysis.utils.control import human_like_move
+#from sanmou_report_analysis.utils.ocr import ocr_text
 
 process_name = "三国：谋定天下"
 

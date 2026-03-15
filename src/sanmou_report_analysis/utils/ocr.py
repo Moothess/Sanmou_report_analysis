@@ -7,7 +7,7 @@ import logging
 from paddleocr import PaddleOCR
 import cv2
 
-from utils.data_structure import OCRResult
+from sanmou_report_analysis.utils.data_structure import OCRResult
 #from utils import NestedText
 #import utils
 

@@ -4,9 +4,9 @@
 import json
 import pickle
 from pathlib import Path
-from utils.meta_info import extract_meta_info
-from utils.report_detail import image_to_report
-from utils.analyze import analysis
+from sanmou_report_analysis.utils.meta_info import extract_meta_info
+from sanmou_report_analysis.utils.report_detail import image_to_report
+from sanmou_report_analysis.utils.analyze import analysis
 
 def get_report_id():
     _root_dir = Path("./data")

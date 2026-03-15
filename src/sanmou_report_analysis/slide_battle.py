@@ -10,11 +10,11 @@ import pyautogui
 import cv2
 import keyboard
 
-from utils.data_structure import MatchResult, TextColor, BoundingBox, create_lazy_dict
-from utils.image import *
-from utils.process_info import get_resolution
-from utils.slide_report import slide_battle_images
-from utils.stitch import stitch_images
+from sanmou_report_analysis.utils.data_structure import MatchResult, TextColor, BoundingBox, create_lazy_dict
+from sanmou_report_analysis.utils.image import *
+from sanmou_report_analysis.utils.process_info import get_resolution
+from sanmou_report_analysis.utils.slide_report import slide_battle_images
+from sanmou_report_analysis.utils.stitch import stitch_images
 
 def collect_report():
     root_dir = Path("./battle")

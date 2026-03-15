@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sanmou-report-analysis"
+version = "0.1.0"
+description = "A tool for capturing battle report screenshots and performing automated analysis for NSLG"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "keyboard>=0.13.5",
+    "mss>=10.1.0",
+    "numpy>=2.4.3",
+    "opencv-python>=4.13.0.92",
+    "paddleocr>=3.4.0",
+    "pandas>=3.0.1",
+    "pillow>=12.1.1",
+    "psutil>=7.2.2",
+    "pyautogui>=0.9.54",
+    "pygetwindow>=0.0.9",
+    "pynput>=1.8.1",
+    "pyqt5>=5.15.11",
+    "pywin32>=311 ; sys_platform == 'win32'",
+    "scipy>=1.17.1",
+    "screeninfo>=0.8.1",
+    "tqdm>=4.67.3",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
