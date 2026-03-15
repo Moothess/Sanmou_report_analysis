@@ -19,12 +19,22 @@ Sanmou Battle Analysis Tool (SBAT)
 
 ## 使用方法
 
+本项目推荐使用 [uv](https://github.com/astral-sh/uv) 进行环境与依赖管理。
+
+首次使用请先在项目根目录执行：
+
+```bash
+uv sync
+```
+
 ### 完整流程（采集 + 分析）
+
+> 该流程依赖 Windows 窗口与输入 API（如 `win32gui`），目前仅支持 Windows。
 
 运行 `sanmou_report_analysis.report_collection`，它会依次完成截图采集和战报分析：
 
 ```bash
-python -m sanmou_report_analysis.report_collection
+uv run python -m sanmou_report_analysis.report_collection
 ```
 
 1. 程序启动后，在游戏内打开目标战报详情页。
@@ -39,7 +49,7 @@ python -m sanmou_report_analysis.report_collection
 直接运行 `sanmou_report_analysis.report_analysis`，对 `data/` 目录下最新的战报数据执行分析：
 
 ```bash
-python -m sanmou_report_analysis.report_analysis
+uv run python -m sanmou_report_analysis.report_analysis
 ```
 
 > `stage1 = True` 表示重新执行元信息提取和图像解析；改为 `False` 则从已保存的 `meta_info.json` / `sentence.pkl` 中读取缓存，直接进行分析。
