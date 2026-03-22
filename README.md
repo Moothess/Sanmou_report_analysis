@@ -27,7 +27,7 @@ Sanmou Battle Analysis Tool (SBAT)
 uv sync
 ```
 
-### 完整流程（采集 + 分析）
+### 完整流程（采集 + 分析）（需要管理员权限）
 
 > 该流程依赖 Windows 窗口与输入 API（如 `win32gui`），目前仅支持 Windows。
 
